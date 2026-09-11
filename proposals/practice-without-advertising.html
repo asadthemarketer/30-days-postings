@@ -1,0 +1,855 @@
+<title>The Permitted Announcement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&family=Fira+Sans:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+  :root{
+    --paper:#F3F1F7;
+    --surface:#FBFAFD;
+    --surface-sunk:#E7E3EF;
+    --ink:#221538;
+    --ink-soft:#5B5070;
+    --ink-faint:#8A7FA0;
+    --rule:#D7D0E3;
+    --rule-soft:#E5E1ED;
+    --accent:#4A2382;
+    --accent-deep:#33165E;
+    --accent-wash:#E3DBF1;
+    --clay:#9E4A3C;
+    --clay-wash:#F2E3DF;
+    --slot-open:#DFDAE9;
+    --focus:#4A2382;
+
+    --f-display:"Spectral",Georgia,"Times New Roman",serif;
+    --f-body:"Fira Sans","Helvetica Neue",Arial,sans-serif;
+    --f-mono:"Fira Mono","SFMono-Regular",Consolas,monospace;
+
+    --measure:66ch;
+    --rail:150px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#140F1E;
+      --surface:#1D1729;
+      --surface-sunk:#0E0A16;
+      --ink:#EAE5F3;
+      --ink-soft:#B0A6C6;
+      --ink-faint:#877D9C;
+      --rule:#342B48;
+      --rule-soft:#29223A;
+      --accent:#B79CE6;
+      --accent-deep:#D5C6F4;
+      --accent-wash:#2C2143;
+      --clay:#CC8672;
+      --clay-wash:#33231F;
+      --slot-open:#2B2440;
+      --focus:#B79CE6;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#140F1E;
+    --surface:#1D1729;
+    --surface-sunk:#0E0A16;
+    --ink:#EAE5F3;
+    --ink-soft:#B0A6C6;
+    --ink-faint:#877D9C;
+    --rule:#342B48;
+    --rule-soft:#29223A;
+    --accent:#B79CE6;
+    --accent-deep:#D5C6F4;
+    --accent-wash:#2C2143;
+    --clay:#CC8672;
+    --clay-wash:#33231F;
+    --slot-open:#2B2440;
+    --focus:#B79CE6;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--f-body);
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:1020px;
+    margin:0 auto;
+    padding-inline:24px;
+    padding-block:0 96px;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    padding-block:72px 40px;
+    border-bottom:1px solid var(--ink);
+  }
+  .eyebrow{
+    font-family:var(--f-mono);
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 26px;
+  }
+  h1{
+    font-family:var(--f-display);
+    font-weight:600;
+    font-size:clamp(2.5rem,6.2vw,4.1rem);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    text-wrap:balance;
+    margin:0;
+    max-width:15ch;
+  }
+  .standfirst{
+    font-family:var(--f-display);
+    font-size:clamp(1.12rem,2.3vw,1.36rem);
+    line-height:1.5;
+    color:var(--ink-soft);
+    max-width:52ch;
+    margin:26px 0 0;
+    text-wrap:pretty;
+  }
+  .colophon{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:26px 36px;
+    margin-top:46px;
+    padding-top:26px;
+    border-top:1px solid var(--rule);
+  }
+  @media (max-width:760px){.colophon{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  @media (max-width:430px){.colophon{grid-template-columns:1fr;gap:18px;}}
+  .colophon dt{
+    font-family:var(--f-mono);
+    font-size:10px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 6px;
+  }
+  .colophon dd{margin:0;font-size:14.5px;line-height:1.45;color:var(--ink);}
+
+  /* ---------- section scaffold ---------- */
+  section{
+    display:grid;
+    grid-template-columns:var(--rail) minmax(0,1fr);
+    gap:0 44px;
+    padding-block:52px;
+    border-bottom:1px solid var(--rule-soft);
+  }
+  section:last-of-type{border-bottom:0;}
+  .rail{
+    font-family:var(--f-mono);
+    font-size:10.5px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    line-height:1.5;
+    padding-top:.6em;
+  }
+  .rail b{display:block;color:var(--accent);font-weight:500;}
+  .body{max-width:var(--measure);}
+  .body.wide{max-width:none;}
+  @media (max-width:820px){
+    section{grid-template-columns:1fr;gap:14px;}
+    .rail{padding-top:0;}
+    .rail b{display:inline;}
+  }
+
+  h2{
+    font-family:var(--f-display);
+    font-weight:600;
+    font-size:clamp(1.55rem,3.1vw,2.05rem);
+    line-height:1.15;
+    letter-spacing:-.015em;
+    text-wrap:balance;
+    margin:0 0 18px;
+  }
+  h3{
+    font-family:var(--f-display);
+    font-weight:600;
+    font-size:1.16rem;
+    line-height:1.3;
+    margin:0 0 8px;
+    letter-spacing:-.005em;
+  }
+  p{margin:0 0 18px;text-wrap:pretty;}
+  p:last-child{margin-bottom:0;}
+  strong{font-weight:600;color:var(--ink);}
+  em{font-style:italic;}
+  a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px;}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--focus);outline-offset:3px;}
+
+  .lede{font-size:1.07rem;color:var(--ink-soft);}
+
+  /* ---------- pull quote ---------- */
+  blockquote{
+    margin:0 0 26px;
+    padding:0 0 0 26px;
+    border-left:2px solid var(--accent);
+    font-family:var(--f-display);
+    font-size:clamp(1.18rem,2.6vw,1.44rem);
+    line-height:1.44;
+    color:var(--ink);
+    text-wrap:pretty;
+  }
+  blockquote cite{
+    display:block;
+    margin-top:14px;
+    font-family:var(--f-mono);
+    font-size:10.5px;
+    font-style:normal;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+
+  /* ---------- discovery list ---------- */
+  .heard{margin:0;}
+  .heard > div{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    gap:4px;
+    padding:16px 0;
+    border-top:1px solid var(--rule-soft);
+  }
+  .heard > div:first-child{border-top:0;padding-top:0;}
+  .heard dt{
+    font-family:var(--f-mono);
+    font-size:10.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .heard dd{margin:0;font-size:15.5px;}
+  .heard .said{color:var(--ink-soft);font-style:italic;font-family:var(--f-display);}
+
+  /* ---------- sitemap ---------- */
+  .pages{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule);}
+  .pg{
+    display:grid;
+    grid-template-columns:210px minmax(0,1fr);
+    gap:0 34px;
+    padding:22px 0;
+    border-bottom:1px solid var(--rule-soft);
+  }
+  .pg-id{padding-top:2px;}
+  .pg-slug{
+    font-family:var(--f-mono);
+    font-size:11.5px;
+    letter-spacing:.01em;
+    color:var(--accent);
+    word-break:break-word;
+  }
+  .pg-meta{
+    display:block;margin-top:7px;
+    font-family:var(--f-mono);font-size:9.5px;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--ink-faint);
+  }
+  .pg h3{margin-bottom:6px;}
+  .pg p{margin:0 0 10px;font-size:15px;color:var(--ink-soft);}
+  .pg-holds{
+    list-style:none;margin:0;padding:0;
+    display:flex;flex-wrap:wrap;gap:6px 8px;
+  }
+  .pg-holds li{
+    font-family:var(--f-mono);
+    font-size:10.5px;
+    letter-spacing:.02em;
+    color:var(--ink-soft);
+    background:var(--surface-sunk);
+    padding:3px 8px;
+  }
+  .pg-note{
+    margin-top:10px!important;
+    font-size:13.4px!important;
+    color:var(--clay)!important;
+    font-style:italic;
+  }
+  @media (max-width:680px){
+    .pg{grid-template-columns:1fr;gap:8px;}
+    .pg-meta{display:inline;margin-left:10px;}
+  }
+
+  /* ---------- workstreams ---------- */
+  .streams{display:flex;flex-direction:column;gap:0;margin:0;}
+  .stream{
+    padding:26px 0;
+    border-top:1px solid var(--rule);
+  }
+  .stream:first-child{border-top:0;padding-top:0;}
+  .stream-tag{
+    font-family:var(--f-mono);
+    font-size:10px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 10px;
+  }
+  .stream ul{margin:14px 0 0;padding-left:0;list-style:none;}
+  .stream ul li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:9px;
+    font-size:15.3px;
+    color:var(--ink-soft);
+  }
+  .stream ul li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:.62em;
+    width:8px;
+    height:1px;
+    background:var(--accent);
+  }
+  .stream ul li strong{color:var(--ink);}
+
+  /* ---------- guardrails ---------- */
+  .rails{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(255px,1fr));
+    gap:0;
+    border:1px solid var(--rule);
+    background:var(--surface);
+  }
+  .rails > div{padding:24px;}
+  .rails > div + div{border-left:1px solid var(--rule);}
+  @media (max-width:640px){
+    .rails > div + div{border-left:0;border-top:1px solid var(--rule);}
+  }
+  .rails h3{
+    font-family:var(--f-mono);
+    font-size:10.5px;
+    font-weight:500;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    margin:0 0 16px;
+  }
+  .rails .do h3{color:var(--accent);}
+  .rails .dont h3{color:var(--clay);}
+  .rails ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
+  .rails li{position:relative;padding-left:22px;font-size:14.8px;line-height:1.5;color:var(--ink-soft);}
+  .rails .do li::before{
+    content:"";position:absolute;left:0;top:.45em;
+    width:9px;height:5px;border-left:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);
+    transform:rotate(-45deg);
+  }
+  .rails .dont li::before{
+    content:"";position:absolute;left:1px;top:.66em;
+    width:10px;height:1.5px;background:var(--clay);
+  }
+
+  .caveat{
+    margin-top:20px;
+    padding:16px 18px;
+    background:var(--clay-wash);
+    border-left:2px solid var(--clay);
+    font-size:14.2px;
+    line-height:1.55;
+    color:var(--ink-soft);
+  }
+  .caveat strong{color:var(--ink);}
+
+  /* ---------- phases ---------- */
+  .phases{display:flex;flex-direction:column;gap:0;}
+  .phase{
+    display:grid;
+    grid-template-columns:112px minmax(0,1fr);
+    gap:0 26px;
+    padding:24px 0;
+    border-top:1px solid var(--rule);
+  }
+  .phase:first-child{border-top:0;padding-top:0;}
+  .phase-when{
+    font-family:var(--f-mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-variant-numeric:tabular-nums;
+    padding-top:.3em;
+  }
+  .phase-when small{display:block;color:var(--ink-faint);letter-spacing:.06em;margin-top:4px;}
+  .phase ul{margin:12px 0 0;padding-left:0;list-style:none;}
+  .phase ul li{
+    position:relative;padding-left:20px;margin-bottom:8px;
+    font-size:15.1px;color:var(--ink-soft);
+  }
+  .phase ul li::before{
+    content:"";position:absolute;left:0;top:.62em;width:8px;height:1px;background:var(--rule);
+  }
+  @media (max-width:620px){
+    .phase{grid-template-columns:1fr;gap:8px;}
+    .phase-when small{display:inline;margin-left:8px;}
+  }
+
+  /* ---------- tables ---------- */
+  .t-scroll{overflow-x:auto;margin:0 0 6px;}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14.8px;}
+  caption{
+    caption-side:top;text-align:left;
+    font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);padding-bottom:12px;
+  }
+  th,td{text-align:left;padding:13px 16px 13px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top;}
+  th{
+    font-family:var(--f-mono);font-size:10px;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);
+    border-bottom:1px solid var(--rule);
+  }
+  td:first-child{color:var(--ink);font-weight:500;padding-right:24px;}
+  td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink);}
+
+  /* ---------- placeholder marker ---------- */
+  .ph{
+    font-family:var(--f-mono);
+    font-size:.92em;
+    background:var(--clay-wash);
+    color:var(--clay);
+    padding:1px 6px;
+    border-bottom:1px dashed var(--clay);
+    white-space:nowrap;
+  }
+
+  /* ---------- asks ---------- */
+  .asks{list-style:none;margin:0;padding:0;counter-reset:ask;}
+  .asks li{
+    counter-increment:ask;
+    position:relative;
+    padding:15px 0 15px 44px;
+    border-top:1px solid var(--rule-soft);
+    font-size:15.3px;
+    color:var(--ink-soft);
+  }
+  .asks li:first-child{border-top:0;}
+  .asks li::before{
+    content:counter(ask,decimal-leading-zero);
+    position:absolute;left:0;top:16px;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;
+    color:var(--accent);
+  }
+  .asks li strong{color:var(--ink);}
+
+  /* ---------- close ---------- */
+  .close{
+    margin-top:8px;
+    padding:34px;
+    background:var(--surface);
+    border:1px solid var(--ink);
+  }
+  .close h2{margin-bottom:12px;}
+  .close p{color:var(--ink-soft);max-width:56ch;}
+  .sign{
+    margin-top:26px;padding-top:20px;border-top:1px solid var(--rule);
+    font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);
+  }
+
+  footer{
+    padding-top:34px;margin-top:44px;border-top:1px solid var(--rule);
+    font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;
+    color:var(--ink-faint);line-height:1.8;
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;}
+  }
+
+  /* ---------- print / PDF ---------- */
+  @page{size:A4;margin:16mm 14mm;}
+  @media print{
+    :root{
+      --paper:#FFFFFF;--surface:#FAF9FC;--surface-sunk:#EFECF5;
+      --ink:#1E1232;--ink-soft:#4E4364;--ink-faint:#7A6F90;
+      --rule:#CAC2D9;--rule-soft:#E0DBEA;
+      --accent:#4A2382;--accent-deep:#2E1356;--accent-wash:#E6DFF2;
+      --clay:#8A4034;--clay-wash:#F2E6E2;--slot-open:#E6E2EE;
+    }
+    body{background:#fff;font-size:10.5pt;line-height:1.5;}
+    .wrap{max-width:none;padding:0;}
+    .masthead{padding-block:0 22px;}
+    h1{font-size:30pt;}
+    .standfirst{font-size:12pt;}
+    section{padding-block:20px;break-inside:avoid;gap:0 26px;--rail:118px;}
+    h2{font-size:15pt;}
+    .close,.pg,.rails,.phase,.stream,blockquote,table{break-inside:avoid;}
+    section.pb{break-before:page;}
+    a{color:var(--ink);text-decoration:none;}
+    footer{break-inside:avoid;}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Website proposal &middot; Prepared in confidence</p>
+    <h1>The Permitted Announcement</h1>
+    <p class="standfirst">A website for Dr. Janine A. Morris&rsquo; private psychiatric practice &mdash; built as the one form of public communication the Medical Council expressly allows: an announcement of the practice and the services offered. Not an advertisement, and never mistakable for one.</p>
+    <dl class="colophon">
+      <div><dt>Prepared for</dt><dd>Dr. Janine A. Morris<br>B.Sc.(Hons) &middot; MB.BS. &middot; DM Psychiatry<br>Consultant Psychiatrist</dd></div>
+      <div><dt>Prepared by</dt><dd><span class="ph">[your name]</span><br><span class="ph">[practice / studio]</span></dd></div>
+      <div><dt>Practice</dt><dd>Suite 2B, 3M Plaza<br>Kensington New Road &amp; Baxter&rsquo;s Road<br>St. Michael &middot; three clinic days weekly</dd></div>
+      <div><dt>Scope</dt><dd>Design and build of a seven-page practice website, plus launch</dd></div>
+      <div><dt>Jurisdictions</dt><dd>Barbados (primary)<br>Jamaica (secondary)</dd></div>
+      <div><dt>Valid for</dt><dd>30 days from issue</dd></div>
+    </dl>
+  </header>
+
+  <section>
+    <div class="rail"><b>The constraint</b>Why this site can exist</div>
+    <div class="body">
+      <h2>You told me the one thing that decides the whole design</h2>
+      <blockquote>
+        &ldquo;The medical council does not allow doctors to advertise here. They can announce the opening of a practice and the services offered, but no advertising can be done.&rdquo;
+        <cite>&mdash; Dr. Janine A. Morris, discovery call</cite>
+      </blockquote>
+      <p>Most web designers would hear that and quietly build you a small brochure site anyway, with a hero image, a call-to-action button and a testimonials carousel. That site would be an advertisement wearing a doctor&rsquo;s coat, and it would put your registration at risk to win you very little.</p>
+      <p>Read the permission carefully and it is more generous than it first appears. You may announce <strong>the practice</strong> and <strong>the services offered</strong>. A website is simply the most complete, most permanent and most useful form that announcement can take &mdash; available at 2am to a worried relative, and at 11am to a GP with your name half-remembered.</p>
+      <p>So the design brief writes itself: <strong>a reference, not a pitch.</strong> Every page answers a question someone actually has. No page asks anyone to choose you.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail"><b>What I heard</b>Discovery call summary</div>
+    <div class="body">
+      <h2>The position the site has to serve</h2>
+      <dl class="heard">
+        <div>
+          <dt>Clinical time</dt>
+          <dd class="said">&ldquo;I am only at the Suite three days a week. I don&rsquo;t work at the hospital.&rdquo;</dd>
+          <dd>Three clinic days, and no hospital switchboard behind you. The site carries the practical load a hospital would otherwise carry: where, when, and how to be seen.</dd>
+        </div>
+        <div>
+          <dt>Capacity</dt>
+          <dd class="said">&ldquo;I&rsquo;m just starting my practice, so there is room for growth.&rdquo;</dd>
+          <dd>A new practice with open appointments. The site&rsquo;s job is to convert the interest you already generate, not to manufacture new demand.</dd>
+        </div>
+        <div>
+          <dt>Where patients come from</dt>
+          <dd class="said">&ldquo;GP referrals, colleagues, hospital follow-ons, word of mouth. It varies.&rdquo;</dd>
+          <dd>Every one of those routes ends with somebody typing your name into a phone. Today that search returns nothing you control. That is the gap this site closes.</dd>
+        </div>
+        <div>
+          <dt>Reach</dt>
+          <dd class="said">&ldquo;I don&rsquo;t see patients online yet. I do also practice medicine in Jamaica.&rdquo;</dd>
+          <dd>Built so a telepsychiatry page and a Jamaica arm can be added later without a rebuild &mdash; and not published until each jurisdiction is confirmed.</dd>
+        </div>
+        <div>
+          <dt>Regulatory position</dt>
+          <dd class="said">&ldquo;No advertising. Announcement of the practice and the services offered is permitted.&rdquo;</dd>
+          <dd>The governing constraint. It sets what every page may say, and rules several standard website features out entirely.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail"><b>The brief</b>Three jobs</div>
+    <div class="body">
+      <h2>What this website actually has to do</h2>
+      <p class="lede">Three jobs, in order of how often they happen. Everything on the site earns its place by serving one of them.</p>
+      <div class="streams">
+        <article class="stream">
+          <p class="stream-tag">Job one &mdash; the search</p>
+          <h3>Be there when somebody looks you up by name</h3>
+          <p>A patient has been given your name by their GP. A relative has heard it from a friend. Before anyone telephones a psychiatrist, they look them up &mdash; and what they find decides whether the call gets made. Right now that search returns a directory stub at best. It should return you: your qualifications, your Suite, your clinic days, stated plainly.</p>
+        </article>
+        <article class="stream">
+          <p class="stream-tag">Job two &mdash; the referral</p>
+          <h3>Let a referring doctor act in ninety seconds</h3>
+          <p>A GP with a distressed patient in the room has moments to decide where to send them. They need four facts: does she take this, how do I send it, how long is the wait, and will I hear back. A page that answers those four questions is the single most commercially valuable thing on the site &mdash; and it is pure information, so it is entirely permitted.</p>
+        </article>
+        <article class="stream">
+          <p class="stream-tag">Job three &mdash; the first appointment</p>
+          <h3>Reduce the fear before the door opens</h3>
+          <p>Seeing a psychiatrist for the first time is frightening in a way that seeing a cardiologist is not, and in Barbados it carries a stigma that keeps people away for years. A page that explains what the first appointment involves, how long it takes, and that it is confidential does real clinical good &mdash; and it does so without persuading anyone of anything.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb">
+    <div class="rail"><b>The site</b>Seven pages</div>
+    <div class="body wide">
+      <h2>Structure</h2>
+      <p class="lede" style="max-width:66ch;">Seven pages. Each one exists because somebody arrives needing exactly what is on it. Where a page carries a compliance risk, that is noted on the page itself rather than buried in a schedule.</p>
+
+      <ul class="pages">
+        <li class="pg">
+          <div class="pg-id"><span class="pg-slug">/</span><span class="pg-meta">Home &middot; the announcement</span></div>
+          <div>
+            <h3>The practice, announced</h3>
+            <p>The formal notice, given a permanent home: your name and post-nominals as they appear on your card, Consultant Psychiatrist, the Suite 2B address, clinic days, and how to make an appointment. Calm, uncrowded, and readable in one screen.</p>
+            <ul class="pg-holds"><li>Name &amp; post-nominals</li><li>Address</li><li>Clinic days</li><li>Appointment route</li><li>Crisis link</li></ul>
+          </div>
+        </li>
+
+        <li class="pg">
+          <div class="pg-id"><span class="pg-slug">/about</span><span class="pg-meta">About &middot; standing</span></div>
+          <div>
+            <h3>Dr. Janine A. Morris</h3>
+            <p>Training, qualifications and registration, stated as a matter of record: B.Sc.(Hons), MB.BS., DM Psychiatry, registration in Barbados and Jamaica, and your areas of clinical interest. Facts a patient and a colleague both need, with no adjectives doing work they shouldn&rsquo;t.</p>
+            <ul class="pg-holds"><li>Qualifications</li><li>Registrations</li><li>Clinical interests</li><li>Portrait</li></ul>
+            <p class="pg-note">No superlatives, no years-of-experience claims framed as a selling point.</p>
+          </div>
+        </li>
+
+        <li class="pg">
+          <div class="pg-id"><span class="pg-slug">/services</span><span class="pg-meta">Services &middot; expressly permitted</span></div>
+          <div>
+            <h3>Services offered</h3>
+            <p>The page the Council&rsquo;s wording most directly protects. A plain statement of what the practice provides &mdash; assessment, diagnosis, medication management, review and follow-up &mdash; and the presentations you see. Written as description, never as an offer.</p>
+            <ul class="pg-holds"><li>Service list</li><li>Conditions seen</li><li>Age range</li><li>What is not offered</li></ul>
+            <p class="pg-note">Final clinical wording is yours. I draft, you correct, nothing publishes without your sign-off.</p>
+          </div>
+        </li>
+
+        <li class="pg">
+          <div class="pg-id"><span class="pg-slug">/for-referring-doctors</span><span class="pg-meta">Referrals &middot; the working page</span></div>
+          <div>
+            <h3>For referring doctors</h3>
+            <p>Written for a colleague, not a patient. What you accept and what you don&rsquo;t, how urgent cases are handled, the current wait time, exactly how to send a referral, and your commitment to write back after assessment. Printable to a single sheet, so it can sit in a GP&rsquo;s drawer.</p>
+            <ul class="pg-holds"><li>Referral criteria</li><li>Urgency guidance</li><li>Current wait time</li><li>How to refer</li><li>Downloadable one-pager</li></ul>
+          </div>
+        </li>
+
+        <li class="pg">
+          <div class="pg-id"><span class="pg-slug">/your-first-appointment</span><span class="pg-meta">Patient information</span></div>
+          <div>
+            <h3>What to expect</h3>
+            <p>How long the first appointment lasts, what will be asked, what to bring, who may come with you, and how confidentiality works. The page that does the most to get a frightened person through the door &mdash; by informing them, which is not the same as persuading them.</p>
+            <ul class="pg-holds"><li>Appointment length</li><li>What to bring</li><li>Confidentiality</li><li>Cancellation policy</li></ul>
+            <p class="pg-note">Fees are discussed privately, not published. The page says so plainly.</p>
+          </div>
+        </li>
+
+        <li class="pg">
+          <div class="pg-id"><span class="pg-slug">/contact</span><span class="pg-meta">Contact &amp; location</span></div>
+          <div>
+            <h3>Finding the Suite</h3>
+            <p>Suite 2B, 3M Plaza, at the corner of Kensington New Road and Baxter&rsquo;s Road, St. Michael &mdash; with a map, parking guidance, the office line, clinic hours, and a short enquiry form that deliberately does not invite clinical detail.</p>
+            <ul class="pg-holds"><li>Map &amp; directions</li><li>Office line</li><li>Clinic hours</li><li>Minimal enquiry form</li></ul>
+            <p class="pg-note">Worth deciding before launch: a dedicated practice email and a covered office line, rather than a personal mobile and a personal address.</p>
+          </div>
+        </li>
+
+        <li class="pg">
+          <div class="pg-id"><span class="pg-slug">/in-a-crisis</span><span class="pg-meta">Safety &middot; non-negotiable</span></div>
+          <div>
+            <h3>If you need help now</h3>
+            <p>Reachable from every page in one tap. Emergency and crisis numbers for Barbados, what to do out of hours, and a clear statement that the practice cannot respond to emergencies by email or web form. Someone will arrive on this site in genuine distress, and the site has a duty to them whether or not they ever become a patient.</p>
+            <ul class="pg-holds"><li>Emergency numbers</li><li>Out-of-hours guidance</li><li>Persistent header link</li></ul>
+            <p class="pg-note">Numbers to be supplied and verified by you &mdash; I will not publish a crisis number I have not had confirmed.</p>
+          </div>
+        </li>
+      </ul>
+
+      <p style="max-width:66ch;margin-top:24px;">Built so that <span class="ph">/telepsychiatry</span> and a Jamaica page can be added later as an eighth and ninth page, once each jurisdiction&rsquo;s position on remote consultation is confirmed in writing. Nothing about the build forecloses that.</p>
+    </div>
+  </section>
+
+  <section class="pb">
+    <div class="rail"><b>Guardrails</b>Non-negotiable</div>
+    <div class="body wide">
+      <h2>What goes on the site, and what never will</h2>
+      <p class="lede" style="max-width:66ch;">Your registration is worth immeasurably more than any traffic this site could earn. These are fixed terms of the build, not preferences &mdash; several are features I will decline to add if asked later.</p>
+
+      <div class="rails">
+        <div class="do">
+          <h3>The site will</h3>
+          <ul>
+            <li>Announce the practice and the services offered, factually</li>
+            <li>State qualifications and registrations as a matter of record</li>
+            <li>Explain conditions, pathways and what to expect</li>
+            <li>Serve referring clinicians as professional information</li>
+            <li>Carry crisis guidance on every page</li>
+            <li>Go to you for sign-off, page by page, before launch</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>The site will not</h3>
+          <ul>
+            <li>Carry paid advertising, ad pixels or retargeting of any kind</li>
+            <li>Display testimonials, patient reviews or case stories</li>
+            <li>Publish consultation fees</li>
+            <li>Make comparative, superlative or outcome claims</li>
+            <li>Use urgency devices &mdash; countdowns, &ldquo;limited slots&rdquo;, pop-ups</li>
+            <li>Invite clinical detail through a web form</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="caveat"><strong>To be clear about the limits of my advice:</strong> I am a designer, not a regulatory adviser, and this plan rests on the position you described to me. Before launch I will put the full page-by-page wording to you in writing, and where there is any doubt I will ask that it be confirmed with the Medical Council or BAMP directly rather than assumed. <strong>Jamaica is a separate jurisdiction</strong> &mdash; no page addressing practice there goes live until that is confirmed independently. You hold final sign-off on every word.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail"><b>The build</b>How it's made</div>
+    <div class="body">
+      <h2>Specification</h2>
+      <div class="streams">
+        <article class="stream">
+          <p class="stream-tag">Accessibility</p>
+          <h3>Usable by someone who is unwell</h3>
+          <p>Built to WCAG 2.1 AA: real contrast, keyboard navigation, proper headings, text that resizes. This matters more than usual here &mdash; a meaningful share of your visitors will be anxious, depressed, medicated, elderly, or reading on a cracked phone in poor light. Accessibility is not a compliance checkbox on a psychiatry site; it is the point.</p>
+        </article>
+        <article class="stream">
+          <p class="stream-tag">Performance</p>
+          <h3>Fast on a Caribbean mobile connection</h3>
+          <p>Static pages, compressed images, no heavy frameworks, no third-party scripts that phone home. The whole site should load in under two seconds on mobile data, because that is how almost everyone will arrive.</p>
+        </article>
+        <article class="stream">
+          <p class="stream-tag">Privacy</p>
+          <h3>Built for the most sensitive category of data there is</h3>
+          <p>The mere fact that somebody contacted a psychiatrist is sensitive personal data under Barbados&rsquo; data-protection law. The enquiry form therefore collects the minimum &mdash; name, contact, preferred time &mdash; and explicitly asks people not to describe their symptoms. Submissions are encrypted in transit and delivered to a practice address, never to an unsecured inbox, and the site carries a privacy notice written for that standard.</p>
+        </article>
+        <article class="stream">
+          <p class="stream-tag">Findability</p>
+          <h3>Findable by name, without being promoted</h3>
+          <p>Correct technical setup so that searching your name, or &ldquo;psychiatrist Barbados&rdquo;, returns the practice: structured data describing a medical practice, accurate address and hours, a clean sitemap, and consistent details across the directories where colleagues look. This is being listed correctly, not being advertised &mdash; but it is one of the items I would want confirmed with the Council before launch.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail"><b>Process</b>Six weeks</div>
+    <div class="body">
+      <h2>How we get there</h2>
+      <div class="phases">
+        <div class="phase">
+          <div class="phase-when">Week 1<small>Confirm</small></div>
+          <div>
+            <h3>Establish what may be said</h3>
+            <ul>
+              <li>Regulatory position confirmed in writing before a word is drafted</li>
+              <li>Your service list, clinical scope and age range agreed</li>
+              <li>Domain, practice email and contact routes decided</li>
+              <li>Crisis numbers supplied and verified by you</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-when">Weeks 2&ndash;3<small>Write</small></div>
+          <div>
+            <h3>Content first, design second</h3>
+            <ul>
+              <li>Every page drafted in full and sent to you for correction</li>
+              <li>Referral one-pager written with you, as the page that must be exact</li>
+              <li>Privacy notice and form wording drafted</li>
+              <li>Nothing designed until the words are signed off</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-when">Weeks 3&ndash;4<small>Design</small></div>
+          <div>
+            <h3>An identity extended, not replaced</h3>
+            <ul>
+              <li>Design built from the card you already have &mdash; the violet, the mark, and your line, <em>Confidential, Compassionate, Evidence-Based Care</em></li>
+              <li>Home and one interior page presented for approval</li>
+              <li>Portrait photography arranged if you want one</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-when">Weeks 4&ndash;5<small>Build</small></div>
+          <div>
+            <h3>Assemble and test</h3>
+            <ul>
+              <li>All seven pages built, responsive and accessible</li>
+              <li>Form, encryption and delivery tested end to end</li>
+              <li>Accessibility and performance audited against the spec above</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-when">Week 6<small>Launch</small></div>
+          <div>
+            <h3>Go live, and hand over</h3>
+            <ul>
+              <li>Final page-by-page sign-off from you, in writing</li>
+              <li>Domain, hosting, SSL and backups live</li>
+              <li>Directory listings updated to match</li>
+              <li>Handover session so you can edit text yourself, plus a dated file of everything published</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail"><b>Investment</b>Indicative</div>
+    <div class="body wide">
+      <h2>Fees</h2>
+      <p class="lede" style="max-width:66ch;">Figures are placeholders for you to set &mdash; the structure is what I am proposing.</p>
+      <div class="t-scroll">
+        <table>
+          <caption>Indicative &mdash; amounts to be confirmed</caption>
+          <thead>
+            <tr><th scope="col">Item</th><th scope="col">Included</th><th scope="col">Basis</th><th scope="col">Fee (BBD)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Website design &amp; build<br><small style="color:var(--ink-faint);font-family:var(--f-mono);font-size:10px;">WEEKS 1&ndash;6</small></td>
+              <td>Seven pages, copywriting, design, build, accessibility and performance audit, privacy notice, referral one-pager, launch and handover</td>
+              <td>Fixed project fee</td>
+              <td class="num"><span class="ph">$0,000</span></td>
+            </tr>
+            <tr>
+              <td>Care plan<br><small style="color:var(--ink-faint);font-family:var(--f-mono);font-size:10px;">OPTIONAL, FROM LAUNCH</small></td>
+              <td>Hosting, SSL, backups, security updates, wait-time and hours kept current, small text edits, annual compliance re-read</td>
+              <td>Monthly, cancellable</td>
+              <td class="num"><span class="ph">$000</span>/mo</td>
+            </tr>
+            <tr>
+              <td>Telepsychiatry page<br><small style="color:var(--ink-faint);font-family:var(--f-mono);font-size:10px;">LATER, IF CLEARED</small></td>
+              <td>Additional page and booking route, once both jurisdictions confirm their position on remote consultation</td>
+              <td>Quoted separately</td>
+              <td class="num">&mdash;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:66ch;margin-top:20px;">Domain registration, hosting and any photography are passed through at cost and agreed with you in advance. Nothing is committed on your behalf without written approval.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail"><b>Open items</b>Before we start</div>
+    <div class="body">
+      <h2>What I need from you</h2>
+      <ol class="asks">
+        <li><strong>The Council&rsquo;s position in writing.</strong> Confirmation of what a practice website may contain &mdash; particularly the services page and the directory listings &mdash; so the build rests on a document rather than a recollection.</li>
+        <li><strong>Your service list and clinical scope.</strong> What you assess and treat, which presentations you don&rsquo;t take, and any age limits. The services and referral pages are only useful if this is exact.</li>
+        <li><strong>Crisis numbers, verified.</strong> The emergency and out-of-hours numbers you want published. I will not put an unverified crisis number in front of someone in distress.</li>
+        <li><strong>Clinic hours and current wait time.</strong> The two facts both patients and referring doctors look for first.</li>
+        <li><strong>How you want to be reached.</strong> Your card currently routes enquiries to a personal mobile, WhatsApp, an office line and a personal email. A dedicated practice address and a covered office line read as more established and keep your own number private &mdash; and this is the one detail that is awkward to change after launch.</li>
+        <li><strong>Domain and existing assets.</strong> Whether a domain is already registered, and the original artwork for the card &mdash; the mark, and the violet &mdash; so the site matches what you are already handing people.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="body wide" style="grid-column:1/-1;">
+      <div class="close">
+        <h2>Where I&rsquo;d start</h2>
+        <p>Week one, on its own: get the Council&rsquo;s position in writing and agree the service list. That costs you nothing but a letter and an hour, and it determines whether the rest of this is a six-week build or a shorter, plainer one.</p>
+        <p>I would rather find that out before you have paid for anything than after. If the answer comes back narrower than we expect, I will tell you so and reduce the scope and the fee to match.</p>
+        <div class="sign">Accepted &mdash; Dr. Janine A. Morris &nbsp;&middot;&nbsp; Signature &nbsp;&middot;&nbsp; Date</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Confidential &mdash; prepared for the named recipient only.<br>
+    Not regulatory or legal advice. All published material subject to the recipient&rsquo;s sign-off and, where relevant, confirmation from the Medical Council of Barbados, BAMP, and the corresponding authority in Jamaica.
+  </footer>
+
+</div>
